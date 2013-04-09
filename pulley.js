@@ -217,7 +217,7 @@
 				base_branch = pull.base.ref,
 				issues = [],
 				urls = [],
-				findBug = /#(\d+)/g;
+				findBug = /[Ff]ixes #(\d+)/g;
 
 			// Search title and body for issues for issues to link to
 			if ( tracker ) {
