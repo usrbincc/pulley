@@ -216,7 +216,7 @@
 				author = JSON.parse( data )[ 0 ].commit.author.name,
 				base_branch = pull.base.ref,
 				issues = [],
-				issuesLine = '.',
+				issuesLine = '',
 				urls = [],
 				findBug = /\b(?:[Ff]ixe[sd]|[Cc]lose[sd]?) #(\d+)/g,
 				findClosesLine = /\nCloses #\d+(?:, closes #\d+)*\.?$/g;
@@ -235,7 +235,7 @@
 
 			// Add issues to the commit message
 			if (issues.length) {
-				issuesLine = ", " + issues.join(", ") + '.';
+				issuesLine = ", " + issues.join(", ");
 				pull.body = pull.body.replace(findClosesLine, '');
 			}
 
@@ -247,7 +247,7 @@
 
 			msg += '\n\n' + pull.body;
 			msg += '\n\nReview URL: ' + pull.issue_url;
-			msg += '\n\nCloses #' + id + issuesLine;
+			msg += '\n\nCloses #' + id + issuesLine + '.';
 
 			var commit = [ "commit", "-a", "--message=" + msg ];
 
