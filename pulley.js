@@ -219,7 +219,7 @@
 				issuesLine = '',
 				urls = [],
 				findBug = /\b(?:[Ff]ixe[sd]|[Cc]lose[sd]?) #(\d+)/g,
-				findClosesLine = /\nCloses #\d+(?:, closes #\d+)*\.?$/g;
+				findClosesLine = /\n+Closes #\d+(?:, closes #\d+)*\.?$/g;
 
 			// Search title and body for issues for issues to link to
 			if ( tracker ) {
