@@ -268,7 +268,7 @@
 						if ( oldCommit === newCommit ) {
 							reset("No commit, aborting push.");
 						} else {
-							exec( "echo git push " + config.remote + " " + base_branch, function( error, stdout, stderr ) {
+							exec( "git push " + config.remote + " " + base_branch, function( error, stdout, stderr ) {
 								console.log( "done.".green );
 								exit();
 							});
