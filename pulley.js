@@ -212,7 +212,7 @@
 
 		callAPI( path, function( data ) {
 			var match,
-				msg = "Close GH-" + id + ": " + pull.title + ".",
+				msg = pull.title,
 				author = JSON.parse( data )[ 0 ].commit.author.name,
 				base_branch = pull.base.ref,
 				issues = [],
@@ -239,6 +239,9 @@
 					return "\n - " + url;
 				}).join("");
 			}
+
+			msg += '\n\n' + pull.body;
+			msg += '\n\nCloses #' + id;
 
 			var commit = [ "commit", "-a", "--message=" + msg ];
 
