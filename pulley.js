@@ -218,7 +218,7 @@
 				issues = [],
 				issuesLine = '.',
 				urls = [],
-				findBug = /\b[Ff]ixes #(\d+)/g,
+				findBug = /\b(?:[Ff]ixe[sd]|[Cc]lose[sd]?) #(\d+)/g,
 				findFixesLine = /\nFixes #\d+(?:, fixes #\d+)*\.?$/g;
 
 			// Search title and body for issues for issues to link to
