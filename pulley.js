@@ -219,7 +219,7 @@
 				issuesLine = '.',
 				urls = [],
 				findBug = /\b(?:[Ff]ixe[sd]|[Cc]lose[sd]?) #(\d+)/g,
-				findFixesLine = /\nFixes #\d+(?:, fixes #\d+)*\.?$/g;
+				findClosesLine = /\nCloses #\d+(?:, closes #\d+)*\.?$/g;
 
 			// Search title and body for issues for issues to link to
 			if ( tracker ) {
@@ -230,13 +230,13 @@
 
 			// Search just body for issues to add to the commit message
 			while ( ( match = findBug.exec( pull.body ) ) ) {
-				issues.push( "fixes #" + match[ 1 ] );
+				issues.push( "closes #" + match[ 1 ] );
 			}
 
 			// Add issues to the commit message
 			if (issues.length) {
 				issuesLine = ", " + issues.join(", ") + '.';
-				pull.body = pull.body.replace(findFixesLine, '');
+				pull.body = pull.body.replace(findClosesLine, '');
 			}
 
 			if ( urls.length ) {
