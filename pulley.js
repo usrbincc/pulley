@@ -218,7 +218,7 @@
 				issues = [],
 				issuesLine = '',
 				urls = [],
-				findBug = /[Ff]ixes #(\d+)/g;
+				findBug = /\b[Ff]ixes #(\d+)/g;
 
 			// Search title and body for issues for issues to link to
 			if ( tracker ) {
