@@ -3,12 +3,9 @@ module.exports = function( grunt ) {
 	'use strict';
 
 	grunt.initConfig({
-		lint: {
-			files: ['grunt.js', 'pulley.js']
-		},
 		watch: {
-			files: '<config:lint.files>',
-			tasks: 'lint'
+			files: '<%= jshint.files %>',
+			tasks: 'jshint'
 		},
 		jshint: {
 			options: {
@@ -25,10 +22,14 @@ module.exports = function( grunt ) {
 				trailing: true,
 				smarttabs: true,
 				node: true
-			}
+			},
+			files: ['Gruntfile.js', 'pulley.js']
 		}
 	});
 
-	grunt.registerTask('default', 'lint');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+
+	grunt.registerTask('default', 'jshint');
 
 };

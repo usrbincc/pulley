@@ -13,6 +13,7 @@
 		prompt = require("prompt"),
 		request = require("request"),
 		colors = require("colors"),
+		pkg = require("./package"),
 
 		// Process references
 		exec = child.exec,
@@ -62,12 +63,19 @@
 			var auth = encodeURIComponent( result.username ) + ":" + encodeURIComponent( result.password );
 			request.post("https://" + auth + "@api.github.com/authorizations", {
 				json: true,
+				headers: {
+					"User-Agent": "Pulley " + pkg.version
+				},
 				body: {
 					scopes: ["repo"],
 					note: "Pulley",
 					note_url: "https://github.com/jeresig/pulley"
 				}
 			}, function( err, res, body ) {
+				if ( err ) {
+					exit( err );
+				}
+				
 				token = body.token;
 				if ( token ) {
 					exec( "git config --global --add pulley.token " + token, function( error, stdout, stderr ) {
@@ -282,7 +290,8 @@
 	function callAPI( path, callback ) {
 		request.get( "https://api.github.com" + path, {
 			headers: {
-				Authorization: "token " + token
+				Authorization: "token " + token,
+				"User-Agent": "Pulley " + pkg.version
 			}
 		}, function( err, res, body ) {
 			var statusCode = res.socket._httpMessage.res.statusCode;
